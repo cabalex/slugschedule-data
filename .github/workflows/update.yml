@@ -40,35 +40,3 @@ jobs:
           file_pattern: "./*.yaucsccs.zstd"
           commit_message: Routine DB Update
           commit_author: GitHub Actions Bot <actions@github.com>
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: database
-          path: ./*.yaucsccs.zstd
-
-  deploy:
-    name: Deploy
-    needs: update
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: database
-          path: ./db
-
-      - name: Commit to sub branch
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          file_pattern: "*.yaucsccs.zstd"
-          commit_message: Routine DB Update
-          commit_author: GitHub Actions Bot <actions@github.com>
-          branch: gh-pages
