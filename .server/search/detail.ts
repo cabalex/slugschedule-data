@@ -1,12 +1,12 @@
 import * as cheerio from 'cheerio';
 import searchRMP from "../ratemyprofessor/search";
 import { AssociatedClass, Class, ClassStatus, InstructionMode } from "../db/DB";
-import { GET } from "./retryableSearch";
+import { UNSAFE_GET } from "./retryableSearch";
 
 
 
 export default async function getClassDetails(classUrl: string, existingRMPInfo?: any): Promise<Class> {
-    let resp = await GET(classUrl);
+    let resp = await UNSAFE_GET(classUrl);
 
     if (resp.status !== 200) {
         throw new Error("Could not get class details");
