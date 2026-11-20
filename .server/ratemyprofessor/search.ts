@@ -10,8 +10,8 @@ const SCHOOL_ID = "U2Nob29sLTEwNzg=";
 function getPisaName(instructorName: string) {
     let splitName = instructorName.split(",");
     let lastName = splitName[0];
-    let firstInitial = splitName[1] ? splitName[1].split(".")[0] : "";
-    return [lastName, firstInitial];
+    let firstInitial = splitName[1] ? splitName[1].split(".")[0].trim() : "";
+    return [lastName.trim(), firstInitial.length > 0 ? firstInitial.charAt(0) : ""];
 }
 
 export default async function searchRMP(instructorName: string, classCode: string, searchWithInitial=false): Promise<Instructor|null> {
